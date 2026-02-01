@@ -300,33 +300,33 @@ const Testimonials = () => {
         <div className="testimonials-grid">
           <div className="testimonial-card">
             <div className="user-profile">
-              <div className="avatar">CD</div>
+              <div className="avatar">JM</div>
               <div className="user-info">
-                <div className="name">Carlos Dev</div>
-                <div className="role">CTO @ StartupX</div>
+                <div className="name">Javier Méndez</div>
+                <div className="role">Director Técnico @ FinTech</div>
               </div>
             </div>
-            <p className="quote">"Redujimos el tiempo de onboarding de 2 semanas a 2 días con la app de IA que nos construyeron. Impresionante."</p>
+            <p className="quote">"Redujimos el tiempo de onboarding de 2 semanas a 2 días. La herramienta se pagó sola en el primer mes de uso."</p>
           </div>
           <div className="testimonial-card">
             <div className="user-profile">
-              <div className="avatar">AC</div>
+              <div className="avatar">SR</div>
               <div className="user-info">
-                <div className="name">Ana Content</div>
-                <div className="role">YouTuber (500k)</div>
+                <div className="name">Sofía R.</div>
+                <div className="role">Creator Economy (1.2M+ Subs)</div>
               </div>
             </div>
-            <p className="quote">"Mi flujo de guiones era un caos. Ahora tengo ideas generadas y organizadas automáticamente cada mañana."</p>
+            <p className="quote">"Mi equipo perdía 15 horas/semana investigando. Ahora tenemos guiones virales listos cada mañana automáticamente."</p>
           </div>
           <div className="testimonial-card">
             <div className="user-profile">
-              <div className="avatar">ES</div>
+              <div className="avatar">LG</div>
               <div className="user-info">
-                <div className="name">Empresa SA</div>
-                <div className="role">Gerente Ops</div>
+                <div className="name">Logística Global</div>
+                <div className="role">Gerencia de Operaciones</div>
               </div>
             </div>
-            <p className="quote">"La solución BYOK nos permite usar nuestros propios modelos sin exponer datos sensibles. Justo lo que buscábamos."</p>
+            <p className="quote">"La solución BYOK fue clave. Usamos nuestra propia API Key y mantenemos control total de los datos sensibles."</p>
           </div>
         </div>
       </div>
