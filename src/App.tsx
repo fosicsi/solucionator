@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Bot, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown } from 'lucide-react';
+import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './App.css';
 
