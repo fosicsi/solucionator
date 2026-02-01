@@ -211,6 +211,23 @@ const Showcase = () => {
           <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '100%', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
             Desarrollamos las herramientas exactas que necesitas: desde <span style={{ color: '#26d0ce', fontWeight: 700, textShadow: '0 0 20px rgba(38, 208, 206, 0.3)' }}>automatizaciones con IA</span> hasta plataformas completas que multiplican tu eficiencia.
           </p>
+          <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary large">
+              Auditar mi Negocio Gratis <ArrowRight size={20} />
+            </button>
+            <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="btn-secondary large" style={{
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.2)',
+              color: 'var(--text-primary)',
+              padding: '12px 28px',
+              borderRadius: '9999px',
+              fontWeight: 600,
+              fontSize: '1rem',
+              transition: 'all 0.3s ease'
+            }}>
+              Ver Soluciones
+            </button>
+          </div>
         </div>
 
         <div className="bento-grid-layout">
