@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown } from 'lucide-react';
+import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown, MousePointer2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -190,92 +190,7 @@ const AnimatedGraph = () => {
   );
 };
 
-const FloatingConversionUI = () => {
-  return (
-    <div className="relative w-full h-[300px] flex items-center justify-center overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 group">
-      {/* Background Context (Blurred) */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 blur-sm scale-110 group-hover:scale-115 transition-transform duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
 
-      {/* Floating Widget Card */}
-      <motion.div
-        className="relative z-10 w-[280px] bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl"
-        initial={{ y: 20, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        whileHover={{ y: -5, transition: { duration: 0.3 } }}
-      >
-        {/* Header: Dropdown look-alike */}
-        <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700/50">
-          <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
-            <div className="p-1.5 rounded-md bg-slate-800 border border-slate-700">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
-            </div>
-            <span>Objetivo: Registro Leads</span>
-          </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-500"><path d="m6 9 6 6 6-6" /></svg>
-        </div>
-
-        {/* Metric */}
-        <div className="mb-4">
-          <div className="text-4xl font-extrabold text-white tracking-tight mb-1">
-            24.8%
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-slate-400">Tasa de Conversión</span>
-            <span className="text-xs font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">+12.5%</span>
-          </div>
-        </div>
-
-        {/* Graph Area */}
-        <div className="relative h-24 w-full mt-2">
-          {/* Grid lines */}
-          <div className="absolute inset-0 flex flex-col justify-between opacity-20">
-            <div className="w-full h-[1px] bg-slate-400"></div>
-            <div className="w-full h-[1px] bg-slate-400"></div>
-            <div className="w-full h-[1px] bg-slate-400 opacity-0"></div>
-          </div>
-
-          {/* The Chart */}
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 100 50" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#26d0ce" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="#26d0ce" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d="M0,50 L0,35 C10,35 15,40 25,30 C35,20 40,25 50,20 C60,15 65,30 75,15 C85,0 90,10 100,2 L100,50 Z"
-              fill="url(#chartGradient)"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
-            <motion.path
-              d="M0,35 C10,35 15,40 25,30 C35,20 40,25 50,20 C60,15 65,30 75,15 C85,0 90,10 100,2"
-              fill="none"
-              stroke="#26d0ce"
-              strokeWidth="2"
-              strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
-          </svg>
-
-          {/* Interactive Dot */}
-          <motion.div
-            className="absolute top-0 right-0 w-3 h-3 bg-white rounded-full border-2 border-accent-primary shadow-[0_0_10px_rgba(38,208,206,0.8)]"
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.5 }}
-            style={{ top: '4%', right: '0%' }}
-          />
-        </div>
-      </motion.div>
-    </div>
-  )
-}
 
 const Showcase = () => {
   return (
@@ -355,16 +270,7 @@ const Showcase = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            className="bento-item full-width analytics-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <FloatingConversionUI />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 z-0 pointer-events-none"></div>
-          </motion.div>
+
         </div>
 
 
