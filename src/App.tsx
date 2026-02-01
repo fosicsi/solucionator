@@ -196,20 +196,18 @@ const Showcase = () => {
     <section id="showcase" className="section-padding showcase-section" style={{ paddingTop: '120px' }}>
       <div className="container">
 
-        <div className="section-header center" style={{ marginBottom: '60px' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px' }}>
-            Tu Negocio no es Genérico <br />
+        <div className="section-header center" style={{ marginBottom: '40px', maxWidth: '1200px', width: '100%' }}>
+          <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px' }}>
+            Tu Negocio no es Genérico. <br />
             <span style={{
               background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              display: 'inline-block',
-              marginTop: '10px'
             }}>
               Tu Software Tampoco
             </span>
           </h2>
-          <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '1200px', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+          <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '100%', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
             Desarrollamos las herramientas exactas que necesitas: desde <span style={{ color: '#26d0ce', fontWeight: 700, textShadow: '0 0 20px rgba(38, 208, 206, 0.3)' }}>automatizaciones con IA</span> hasta plataformas completas que multiplican tu eficiencia.
           </p>
         </div>
@@ -427,7 +425,7 @@ const CTA = () => {
           <div className="cta-content-grid">
             <div className="cta-text-col">
               <h2 className="cta-title" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', lineHeight: 1.1, marginBottom: '24px', fontWeight: 800 }}>
-                ¿Tu idea vale más que <br />
+                ¿Tu idea vale más que&nbsp;
                 <span style={{
                   background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
                   WebkitBackgroundClip: 'text',
@@ -493,12 +491,11 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="brand-logo">
-              <Bot size={24} className="accent-icon" />
-              <span>Solucionator</span>
+            <div className="brand-logo" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src="/logo-full.png" alt="Solucionator AI" style={{ height: '35px', width: 'auto' }} />
             </div>
             <p>
-              Transformando la manera en que trabajas con herramientas de IA a medida.
+              Deja de adaptar tu negocio al software. Construye la tecnología exacta para dominar tu mercado.
             </p>
           </div>
           <div className="footer-links-col">
