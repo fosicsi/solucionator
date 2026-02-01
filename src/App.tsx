@@ -184,47 +184,101 @@ const AnimatedGraph = () => {
         ></motion.div>
       ))}
       <div className="graph-label flex flex-col items-start gap-1">
-        <span className="text-4xl md:text-5xl font-extrabold tracking-tight">+400%</span>
-        <span className="text-sm font-semibold uppercase tracking-wider opacity-80 pl-1">Leads / Mes</span>
+        {/* Content for graph-label if any, otherwise it's just a container */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-const LeadNotifications = () => {
-  const notifications = [
-    { name: "Sofia R.", action: "Agendó una demo", time: "Ahora", color: "bg-green-500" },
-    { name: "TechCorp", action: "Nuevo Lead Calificado", time: "Hace 2m", color: "bg-blue-500" },
-    { name: "Juan M.", action: "Checkout Completado", time: "Hace 15m", color: "bg-purple-500" },
-  ];
-
+const MagneticField = () => {
   return (
-    <div className="flex flex-col gap-3 w-full max-w-[320px]">
-      <div className="mb-2">
-        <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-1">
-          Demanda Automática
-        </h3>
-        <p className="text-sm text-slate-400 font-medium">Tu pipeline, funcionando en piloto automático.</p>
+    <div className="relative w-full h-[250px] flex flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-900/50">
+      {/* Background Grid & Glow */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-slate-900 z-10" />
+
+      {/* The Reactor Core */}
+      <div className="relative z-20 flex items-center justify-center">
+        {/* Core Glow */}
+        <motion.div
+          className="absolute w-40 h-40 rounded-full bg-accent-primary/20 blur-3xl"
+          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+
+        {/* Core Ring */}
+        <div className="relative w-24 h-24 rounded-full border-2 border-accent-primary/30 flex items-center justify-center backdrop-blur-sm bg-slate-900/40 shadow-[0_0_30px_rgba(38,208,206,0.2)]">
+          <motion.div
+            className="absolute inset-0 rounded-full border-t-2 border-accent-primary"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          />
+          <Sparkles className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" size={32} />
+        </div>
       </div>
 
-      {notifications.map((n, i) => (
+      {/* Incoming Particles (Raw Traffic) */}
+      {[...Array(6)].map((_, i) => (
         <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.2 }}
-          className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-700/50 backdrop-blur-sm shadow-lg"
+          key={`in-${i}`}
+          className="absolute left-0 w-2 h-2 rounded-full bg-slate-500/50"
+          initial={{ x: -20, y: 50 + Math.random() * 100, opacity: 0 }}
+          animate={{
+            x: "50%",
+            y: "50%",
+            opacity: [0, 1, 0],
+            scale: [1, 0.5]
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            delay: i * 0.4,
+            ease: "circIn"
+          }}
+          style={{ top: 0, bottom: 0, margin: 'auto' }}
+        />
+      ))}
+
+      {/* Outgoing Beam (Converted Leads) */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[2px] bg-gradient-to-r from-accent-primary to-transparent opacity-30" />
+      {[...Array(4)].map((_, i) => (
+        <motion.div
+          key={`out-${i}`}
+          className="absolute z-20 flex items-center gap-2"
+          initial={{ x: 0, opacity: 0, scale: 0 }}
+          animate={{ x: 150 + i * 50, opacity: [0, 1, 0], scale: 1 }}
+          transition={{ duration: 1.5, repeat: Infinity, delay: 1 + i * 0.5 }}
+          style={{ left: '50%', top: '45%' }}
         >
-          <div className={`w-8 h-8 rounded-full ${n.color} flex items-center justify-center text-[10px] font-bold text-white shadow-inner`}>
-            {n.name.charAt(0)}
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(38,208,206,0.6)]">
+            <Users size={14} className="text-slate-900" />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-white truncate">{n.name}</p>
-            <p className="text-[10px] text-slate-300 truncate">{n.action}</p>
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono">{n.time}</div>
+          <span className="text-xs font-bold text-accent-primary bg-slate-900/80 px-2 py-1 rounded-full border border-accent-primary/30">
+            +$2.4k
+          </span>
         </motion.div>
       ))}
+
+      {/* Floating UI Elements */}
+      <div className="absolute bottom-4 left-6 z-30">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">System Active</span>
+        </div>
+      </div>
+
+      <div className="absolute top-4 right-6 z-30 text-right">
+        <h4 className="text-3xl font-black text-white leading-none tracking-tighter">
+          <motion.span
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 0.2, repeat: Infinity, repeatType: "reverse" }}
+          >
+            24/7
+          </motion.span>
+        </h4>
+        <p className="text-[10px] text-accent-primary font-bold uppercase tracking-wider">Lead Flow</p>
+      </div>
+
     </div>
   )
 }
@@ -316,12 +370,12 @@ const Showcase = () => {
           >
             <div className="analytics-layout">
               <div className="analytics-info z-10" style={{ maxWidth: '45%' }}>
-                <LeadNotifications />
+                <MagneticField />
               </div>
               <div className="analytics-graph z-0 mix-blend-overlay opacity-50">
                 <AnimatedGraph />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 z-0"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 z-0 pointer-events-none"></div>
             </div>
           </motion.div>
         </div>
