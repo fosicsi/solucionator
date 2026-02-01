@@ -426,41 +426,44 @@ const CTA = () => {
           <div className="cta-content-grid">
             <div className="cta-text-col">
               <h2 className="cta-title" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', lineHeight: 1.1, marginBottom: '24px', fontWeight: 800 }}>
-                ¿Tu idea vale más que&nbsp;
+                Solicita tu <br />
                 <span style={{
                   background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}>
-                  tu tiempo?
+                  Roadmap de IA
                 </span>
               </h2>
               <p className="cta-desc" style={{ fontSize: '1.25rem', marginBottom: '32px', maxWidth: '90%' }}>
-                Deja de perder horas en tareas manuales. Cuéntanos qué te frena y nosotros construiremos la <span className="font-bold">Inteligencia Artificial</span> que lo resuelva por ti.
+                Analizamos tus cuellos de botella y te diseñamos un plan de automatización a medida. <span className="text-white font-bold">Sin coste. Sin compromiso.</span>
               </p>
               <div className="cta-benefits">
-                <div className="benefit-item"><div className="check-icon">✓</div> Análisis de viabilidad gratuito</div>
-                <div className="benefit-item"><div className="check-icon">✓</div> Prototipo funcional en 7 días</div>
-                <div className="benefit-item"><div className="check-icon">✓</div> Privacidad garantizada (BYOK)</div>
+                <div className="benefit-item"><div className="check-icon">✓</div> Auditoría de procesos manuales</div>
+                <div className="benefit-item"><div className="check-icon">✓</div> Estrategia de implementación (7 días)</div>
+                <div className="benefit-item"><div className="check-icon">✓</div> Calculadora de ROI personalizada</div>
+              </div>
+              <div className="mt-6 flex items-center gap-2 text-sm text-yellow-400 font-medium bg-yellow-400/10 p-2 rounded-lg w-fit border border-yellow-400/20">
+                <Sparkles size={16} /> Solo 3 cupos de consultoría disponibles esta semana
               </div>
             </div>
 
-            <form className="cta-form" onSubmit={handleSubmit}>
+            <form className="cta-form" onSubmit={handleSubmit} style={{ position: 'relative' }}>
               <div className="input-group">
-                <label>Tu Email Corporativo</label>
+                <label>¿Dónde te enviamos el plan?</label>
                 <input
                   type="email"
-                  placeholder="nombre@empresa.com"
+                  placeholder="tu@empresa.com"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="input-group">
-                <label>¿Qué quieres automatizar?</label>
+                <label>Descríbenos tu mayor dolor de cabeza actual</label>
                 <textarea
                   rows={3}
-                  placeholder="Ej: Paso 2 horas al día copiando datos de Excel a..."
+                  placeholder="Ej: 'Mi equipo pierde 4 horas al día extrayendo datos de PDFs...'"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -472,12 +475,12 @@ const CTA = () => {
                 disabled={formState === 'sending' || formState === 'success'}
               >
                 {formState === 'idle' && (
-                  <>Enviar Consulta <ArrowRight size={18} /></>
+                  <>Recibir mi Plan de Automatización <ArrowRight size={18} /></>
                 )}
-                {formState === 'sending' && 'Enviando...'}
-                {formState === 'success' && '¡Mensaje Enviado!'}
+                {formState === 'sending' && 'Analizando solicitud...'}
+                {formState === 'success' && '¡Solicitud Recibida!'}
               </button>
-              <p className="form-note">Te responderemos desde solucionatorai@gmail.com</p>
+              <p className="form-note">Te responderemos en menos de 24h con tu diagnóstico.</p>
             </form>
           </div>
         </div>
