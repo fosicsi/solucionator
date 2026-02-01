@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown, MousePointer2 } from 'lucide-react';
+import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -171,24 +171,7 @@ const Features = () => {
   );
 };
 
-const AnimatedGraph = () => {
-  return (
-    <div className="anim-card-content anim-graph">
-      {[20, 35, 45, 80, 120, 177].map((h, i) => (
-        <motion.div
-          key={i}
-          initial={{ height: 10 }}
-          whileInView={{ height: `${(h / 177) * 100}%` }}
-          transition={{ delay: i * 0.2, duration: 1, type: "spring" }}
-          className="graph-bar"
-        ></motion.div>
-      ))}
-      <div className="graph-label flex flex-col items-start gap-1">
-        {/* Content for graph-label if any, otherwise it's just a container */}
-      </div>
-    </div>
-  );
-};
+
 
 
 
