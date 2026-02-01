@@ -190,95 +190,89 @@ const AnimatedGraph = () => {
   );
 };
 
-const MagneticField = () => {
+const FloatingConversionUI = () => {
   return (
-    <div className="relative w-full h-[250px] flex flex-col items-center justify-center overflow-hidden rounded-3xl bg-slate-900/50">
-      {/* Background Grid & Glow */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.05)_1px,transparent_1px)] bg-[size:20px_20px]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-transparent to-slate-900 z-10" />
+    <div className="relative w-full h-[300px] flex items-center justify-center overflow-hidden rounded-3xl bg-slate-900 border border-slate-800 group">
+      {/* Background Context (Blurred) */}
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-40 blur-sm scale-110 group-hover:scale-115 transition-transform duration-700" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
 
-      {/* The Reactor Core */}
-      <div className="relative z-20 flex items-center justify-center">
-        {/* Core Glow */}
-        <motion.div
-          className="absolute w-40 h-40 rounded-full bg-accent-primary/20 blur-3xl"
-          animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        />
-
-        {/* Core Ring */}
-        <div className="relative w-24 h-24 rounded-full border-2 border-accent-primary/30 flex items-center justify-center backdrop-blur-sm bg-slate-900/40 shadow-[0_0_30px_rgba(38,208,206,0.2)]">
-          <motion.div
-            className="absolute inset-0 rounded-full border-t-2 border-accent-primary"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          />
-          <Sparkles className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" size={32} />
-        </div>
-      </div>
-
-      {/* Incoming Particles (Raw Traffic) */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={`in-${i}`}
-          className="absolute left-0 w-2 h-2 rounded-full bg-slate-500/50"
-          initial={{ x: -20, y: 50 + Math.random() * 100, opacity: 0 }}
-          animate={{
-            x: "50%",
-            y: "50%",
-            opacity: [0, 1, 0],
-            scale: [1, 0.5]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "circIn"
-          }}
-          style={{ top: 0, bottom: 0, margin: 'auto' }}
-        />
-      ))}
-
-      {/* Outgoing Beam (Converted Leads) */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-[2px] bg-gradient-to-r from-accent-primary to-transparent opacity-30" />
-      {[...Array(4)].map((_, i) => (
-        <motion.div
-          key={`out-${i}`}
-          className="absolute z-20 flex items-center gap-2"
-          initial={{ x: 0, opacity: 0, scale: 0 }}
-          animate={{ x: 150 + i * 50, opacity: [0, 1, 0], scale: 1 }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: 1 + i * 0.5 }}
-          style={{ left: '50%', top: '45%' }}
-        >
-          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-[0_0_20px_rgba(38,208,206,0.6)]">
-            <Users size={14} className="text-slate-900" />
+      {/* Floating Widget Card */}
+      <motion.div
+        className="relative z-10 w-[280px] bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl"
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        whileHover={{ y: -5, transition: { duration: 0.3 } }}
+      >
+        {/* Header: Dropdown look-alike */}
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700/50">
+          <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
+            <div className="p-1.5 rounded-md bg-slate-800 border border-slate-700">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
+            </div>
+            <span>Objetivo: Registro Leads</span>
           </div>
-          <span className="text-xs font-bold text-accent-primary bg-slate-900/80 px-2 py-1 rounded-full border border-accent-primary/30">
-            +$2.4k
-          </span>
-        </motion.div>
-      ))}
-
-      {/* Floating UI Elements */}
-      <div className="absolute bottom-4 left-6 z-30">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">System Active</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-500"><path d="m6 9 6 6 6-6" /></svg>
         </div>
-      </div>
 
-      <div className="absolute top-4 right-6 z-30 text-right">
-        <h4 className="text-3xl font-black text-white leading-none tracking-tighter">
-          <motion.span
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 0.2, repeat: Infinity, repeatType: "reverse" }}
-          >
-            24/7
-          </motion.span>
-        </h4>
-        <p className="text-[10px] text-accent-primary font-bold uppercase tracking-wider">Lead Flow</p>
-      </div>
+        {/* Metric */}
+        <div className="mb-4">
+          <div className="text-4xl font-extrabold text-white tracking-tight mb-1">
+            24.8%
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-slate-400">Tasa de Conversión</span>
+            <span className="text-xs font-bold text-green-400 bg-green-400/10 px-1.5 py-0.5 rounded">+12.5%</span>
+          </div>
+        </div>
 
+        {/* Graph Area */}
+        <div className="relative h-24 w-full mt-2">
+          {/* Grid lines */}
+          <div className="absolute inset-0 flex flex-col justify-between opacity-20">
+            <div className="w-full h-[1px] bg-slate-400"></div>
+            <div className="w-full h-[1px] bg-slate-400"></div>
+            <div className="w-full h-[1px] bg-slate-400 opacity-0"></div>
+          </div>
+
+          {/* The Chart */}
+          <svg className="w-full h-full overflow-visible" viewBox="0 0 100 50" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#26d0ce" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#26d0ce" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <motion.path
+              d="M0,50 L0,35 C10,35 15,40 25,30 C35,20 40,25 50,20 C60,15 65,30 75,15 C85,0 90,10 100,2 L100,50 Z"
+              fill="url(#chartGradient)"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
+            <motion.path
+              d="M0,35 C10,35 15,40 25,30 C35,20 40,25 50,20 C60,15 65,30 75,15 C85,0 90,10 100,2"
+              fill="none"
+              stroke="#26d0ce"
+              strokeWidth="2"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          </svg>
+
+          {/* Interactive Dot */}
+          <motion.div
+            className="absolute top-0 right-0 w-3 h-3 bg-white rounded-full border-2 border-accent-primary shadow-[0_0_10px_rgba(38,208,206,0.8)]"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.5 }}
+            style={{ top: '4%', right: '0%' }}
+          />
+        </div>
+      </motion.div>
     </div>
   )
 }
@@ -368,15 +362,8 @@ const Showcase = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <div className="analytics-layout">
-              <div className="analytics-info z-10" style={{ maxWidth: '45%' }}>
-                <MagneticField />
-              </div>
-              <div className="analytics-graph z-0 mix-blend-overlay opacity-50">
-                <AnimatedGraph />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 z-0 pointer-events-none"></div>
-            </div>
+            <FloatingConversionUI />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20 z-0 pointer-events-none"></div>
           </motion.div>
         </div>
 
