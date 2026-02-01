@@ -1146,12 +1146,12 @@ h3 {
 
 .graph-label {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 2.5rem;
+  top: 30px;
+  left: 30px;
   font-weight: 800;
   color: var(--accent-primary);
-  letter-spacing: -0.05em;
+  /* Removed -0.05em letter spacing causing the squash bug */
+  text-shadow: 0 0 30px rgba(38, 208, 206, 0.4);
 }
 
 /* Analytics Card Layout */
@@ -1164,7 +1164,49 @@ h3 {
   padding: 40px;
 }
 
+/* Theme-aware Text Styles for Viral Card */
+.viral-title {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  font-weight: 800;
+  /* Default (Light Mode) */
+  background: var(--text-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme='dark'] .viral-title {
+  /* Dark Mode Gradient */
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.viral-desc {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  /* Default (Light Mode) */
+  color: var(--text-secondary);
+}
+
+.viral-desc span {
+  font-weight: bold;
+  color: var(--accent-primary);
+}
+
+[data-theme='dark'] .viral-desc {
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .viral-desc span {
+  color: #fff;
+}
+
 .analytics-info h3 {
+  /* Keeping legacy support if needed, but overriding above */
   font-size: 2rem;
   margin-bottom: 4px;
   font-weight: 800;

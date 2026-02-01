@@ -183,10 +183,48 @@ const AnimatedGraph = () => {
           className="graph-bar"
         ></motion.div>
       ))}
-      <div className="graph-label flex flex-col">
-        <span>x177.6</span>
-        <span className="text-sm font-normal opacity-70">Viralidad</span>
+      <div className="graph-label flex flex-col items-start gap-1">
+        <span className="text-4xl md:text-5xl font-extrabold tracking-tight">+400%</span>
+        <span className="text-sm font-semibold uppercase tracking-wider opacity-80 pl-1">Leads / Mes</span>
       </div>
+    </div>
+  )
+}
+
+const LeadNotifications = () => {
+  const notifications = [
+    { name: "Sofia R.", action: "Agendó una demo", time: "Ahora", color: "bg-green-500" },
+    { name: "TechCorp", action: "Nuevo Lead Calificado", time: "Hace 2m", color: "bg-blue-500" },
+    { name: "Juan M.", action: "Checkout Completado", time: "Hace 15m", color: "bg-purple-500" },
+  ];
+
+  return (
+    <div className="flex flex-col gap-3 w-full max-w-[320px]">
+      <div className="mb-2">
+        <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-1">
+          Demanda Automática
+        </h3>
+        <p className="text-sm text-slate-400 font-medium">Tu pipeline, funcionando en piloto automático.</p>
+      </div>
+
+      {notifications.map((n, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: i * 0.2 }}
+          className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/80 border border-slate-700/50 backdrop-blur-sm shadow-lg"
+        >
+          <div className={`w-8 h-8 rounded-full ${n.color} flex items-center justify-center text-[10px] font-bold text-white shadow-inner`}>
+            {n.name.charAt(0)}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-bold text-white truncate">{n.name}</p>
+            <p className="text-[10px] text-slate-300 truncate">{n.action}</p>
+          </div>
+          <div className="text-[10px] text-slate-500 font-mono">{n.time}</div>
+        </motion.div>
+      ))}
     </div>
   )
 }
@@ -277,9 +315,8 @@ const Showcase = () => {
             transition={{ delay: 0.3 }}
           >
             <div className="analytics-layout">
-              <div className="analytics-info glass-panel z-10">
-                <h3>x177 Viralidad</h3>
-                <p>Resultados obtenidos por nuestros clientes usando herramientas a medida.</p>
+              <div className="analytics-info z-10" style={{ maxWidth: '45%' }}>
+                <LeadNotifications />
               </div>
               <div className="analytics-graph z-0 mix-blend-overlay opacity-50">
                 <AnimatedGraph />
