@@ -484,6 +484,9 @@ const Footer = () => {
             <p>
               Deja de adaptar tu negocio al software. Construye la tecnología exacta para dominar tu mercado.
             </p>
+            <p style={{ marginTop: '16px', fontSize: '0.85rem', color: '#94a3b8', fontStyle: 'italic' }}>
+              ¿Sigues bajando? Eso significa que tu intuición te dice algo. <a href="#" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ color: '#26d0ce', textDecoration: 'underline' }}>Hagámoslo realidad.</a>
+            </p>
           </div>
           <div className="footer-links-col">
             <h4>Aprender</h4>
