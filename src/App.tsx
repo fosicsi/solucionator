@@ -1,5 +1,50 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './App.css';
+
+// Componente para animar "frame a frame" (simulado con scroll-physics) el video/imagen
+const ScrollVideo = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Transformaciones basadas en scroll para dar efecto de "animación"
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.05, 1]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 2]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
+
+  return (
+    <div ref={ref} className="relative w-full aspect-square md:aspect-[4/3] bg-charcoal rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex items-center justify-center">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-purple-500/20 z-0"></div>
+
+      {/* Animated Image/Video */}
+      <motion.img
+        src="/video-home.webp"
+        alt="Hero Animation"
+        className="w-full h-full object-cover z-10 relative"
+        style={{ y, scale, rotate, opacity }}
+      />
+
+      {/* Floating UI Overlay (Static relative to card) */}
+      <div className="absolute bottom-6 right-6 z-20 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-lg max-w-[200px]">
+        <div className="flex items-center gap-2 mb-2">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <span className="text-[10px] font-mono text-primary font-bold tracking-wider">SYSTEM ACTIVE</span>
+        </div>
+        <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-primary"
+            style={{ width: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function App() {
   const [formState, setFormState] = useState<'idle' | 'sending' | 'success'>('idle');
@@ -103,27 +148,10 @@ export default function App() {
                     </div>
 
                     {/* Visual Content (Engineering 3D Vibe) */}
+                    {/* Visual Content (Scroll Animated WebP) */}
                     <div className="w-full flex-1 relative perspective-1000 group">
                       <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                      <div className="relative w-full aspect-square md:aspect-[4/3] bg-charcoal rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex items-center justify-center">
-                        <div className="w-full h-full bg-cover bg-center opacity-90 mix-blend-screen" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuADl2FMUUpRlNTtaEdLKPw1CzrUlaULbUufQLdLX65gV9aHArufO2SOpIuhj1pPcJ6MslOQxJf33pgd4b5s4gO1fjfJEKGw2Q5zsV5V77WXkeP8-ehsVvbG3Yw2d0e9T0NxqUxjWD5I8xb4SXhLXpizDM6oWYeeCi7yBpz02SIq2VZs-iomTtu1SKlHGKu3nGdGsf1I4MtBZiLQfyXQnuVgiGa8fWVqa2wA7-py5LeWCm46upUZKTtpUN3v7CVDm6SdjNBDZ7EeHiMX')" }}></div>
-
-                        {/* Floating Metric Card */}
-                        <div className="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-lg">
-                          <div className="flex justify-between items-center mb-3">
-                            <div className="flex gap-2">
-                              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div className="text-[10px] font-mono text-primary uppercase">Status: ROI Positive</div>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="h-2 w-3/4 bg-primary/40 rounded"></div>
-                            <div className="h-2 w-1/2 bg-primary/20 rounded"></div>
-                          </div>
-                        </div>
-                      </div>
+                      <ScrollVideo />
                     </div>
                   </div>
                 </div>
@@ -339,8 +367,8 @@ export default function App() {
                     type="submit"
                     disabled={formState === 'sending' || formState === 'success'}
                     className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${formState === 'success'
-                        ? 'bg-green-500 text-white'
-                        : 'bg-charcoal text-white hover:bg-primary hover:text-charcoal'
+                      ? 'bg-green-500 text-white'
+                      : 'bg-charcoal text-white hover:bg-primary hover:text-charcoal'
                       }`}
                   >
                     {formState === 'idle' && (
