@@ -1,550 +1,306 @@
-
-import { motion } from 'framer-motion';
-import { ArrowRight, Cpu, X, Menu, Settings, Users, Sparkles, Moon, Sun, ChevronDown } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 
-// --- FINAL VERSION: CREATIVE DESK HERO ---
-// Replaced Hero Image with "Creative Workspace" photo. Removed overlay text layers.
+// Note: Ensure Tailwind is installed and configured for these classes to work.
 
-const scrollToContact = () => {
-  const contactSection = document.getElementById('contact');
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' });
-  }
-};
-
-const Navbar = ({ isDark, toggleTheme }: { isDark: boolean, toggleTheme: () => void }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function App() {
   return (
-    <nav
-      className="navbar"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        zIndex: 100,
-        background: '#2f333c', // Slightly lighter to perfect the match
-        backdropFilter: 'none', // Removed blur to ensure seamless color match
-        WebkitBackdropFilter: 'none',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
-        transition: 'all 0.3s ease'
-      }}
-    >
-      <div className="container navbar-container">
-        <div className="logo">
-          <div className="logo-icon-wrapper" style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Full Logo (Icon + Text) */}
-            <img src="/logo-full.png" alt="Solucionator Logo" style={{ height: '45px', width: 'auto' }} />
-          </div>
-        </div>
+    <div className="bg-background-light dark:bg-background-dark text-charcoal font-display overflow-x-hidden antialiased selection:bg-primary selection:text-white min-h-screen flex flex-col">
+      {/* Background Grid */}
+      <div className="fixed inset-0 pointer-events-none z-0 bg-grid-pattern opacity-60"></div>
 
-        <div className="nav-links desktop-only">
-          <a href="#features" style={{ color: '#26d0ce', fontWeight: 600 }}>Soluciones</a>
-          <a href="#showcase" style={{ color: '#26d0ce', fontWeight: 600 }}>Resultados</a>
-          <a href="#testimonials" style={{ color: '#26d0ce', fontWeight: 600 }}>Testimonios</a>
-
-          <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-            {isDark ? <Sun size={20} color="#26d0ce" /> : <Moon size={20} color="#26d0ce" />}
-          </button>
-
-          <button onClick={scrollToContact} className="btn-primary small" style={{ backgroundColor: '#26d0ce', color: '#000', border: 'none' }}>
-            Agendar Auditoría Gratis
-          </button>
-        </div>
-
-        <div className="mobile-actions">
-          <button onClick={toggleTheme} className="theme-toggle-mobile">
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
-          <button className="mobile-toggle" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="mobile-menu">
-          <a href="#features" onClick={() => setIsOpen(false)}>Soluciones</a>
-          <a href="#showcase" onClick={() => setIsOpen(false)}>Resultados</a>
-          <button onClick={() => { setIsOpen(false); scrollToContact(); }} className="btn-primary full-width mt-4">
-            Agendar Auditoría Gratis
-          </button>
-        </div>
-      )}
-    </nav>
-  );
-};
-
-
-const FeatureCard = ({ icon: Icon, title, description, delay }: { icon: any, title: string, description: string, delay: number }) => (
-  <motion.div
-    className="feature-card"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay }}
-  >
-    <div className="feature-icon">
-      <Icon size={24} />
-    </div>
-    <h3>{title}</h3>
-    <p>{description}</p>
-  </motion.div>
-);
-
-const Features = () => {
-  return (
-    <section id="features" className="features-section" style={{ paddingBottom: '100px', paddingTop: '60px' }}>
-      <div className="container">
-        <div className="section-header center" style={{ marginBottom: '60px' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px' }}>
-            Soluciones que <br />
-            <span style={{
-              background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              Pagan su Propio Desarrollo
-            </span>
-          </h2>
-          <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '100%', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
-            No vendemos software genérico. Creamos <span style={{ color: '#26d0ce', fontWeight: 700 }}>activos digitales</span> que trabajan por ti.
-          </p>
-        </div>
-
-        <div className="features-grid">
-          <FeatureCard
-            icon={Users}
-            title="Para Youtubers"
-            description="Automatiza la investigación de guiones, gestión de comentarios y análisis de tendencias. Tu asistente de producción 24/7."
-            delay={0.1}
-          />
-          <FeatureCard
-            icon={Cpu}
-            title="Para Agencias"
-            description="Generación de reportes automáticos, onboarding de clientes y chatbots de soporte entrenados con TUS datos."
-            delay={0.2}
-          />
-          <FeatureCard
-            icon={Settings}
-            title="Para Empresas"
-            description="Conecta tu ERP con IA. Clasificación de facturas, redacción legal preliminar y análisis financiero automático."
-            delay={0.3}
-          />
-        </div>
-
-        <div className="bento-grid">
-          <motion.div
-            className="bento-card bento-dark"
-            whileInView={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: -20 }}
-            viewport={{ once: true }}
-          >
-            <div className="bento-glow bento-glow-blue"></div>
-            <h3 className="z-10 relative">Tus Datos, Tu Control (BYOK)</h3>
-            <p className="z-10 relative">Te entregamos el código o el ejecutable. No dependes de nosotros para siempre.</p>
-            <div className="tags z-10 relative mt-4">
-              <span className="tag">Privacidad Total</span>
-              <span className="tag">Sin Monthly Fees</span>
+      {/* Main Wrapper */}
+      <div className="relative z-10 flex min-h-screen w-full flex-col">
+        {/* Navigation */}
+        <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-gray-200/50 bg-white/80 backdrop-blur-md px-10 py-3 shadow-sm">
+          <div className="flex items-center gap-3 text-charcoal">
+            <div className="flex size-8 items-center justify-center rounded-lg bg-charcoal text-primary">
+              <span className="material-symbols-outlined text-[20px]">architecture</span>
             </div>
-          </motion.div>
-
-          <motion.div
-            className="bento-card bento-deep"
-            whileInView={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: 20 }}
-            viewport={{ once: true }}
-          >
-            <div className="bento-glow bento-glow-purple"></div>
-            <Sparkles className="sparkle-icon" size={32} />
-            <h3 className="z-10 relative">ROI en Semanas</h3>
-            <p className="z-10 relative">Nuestros clientes recuperan la inversión en menos de 2 meses solo en horas ahorradas.</p>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-
-
-
-
-const Showcase = () => {
-  return (
-    <section id="showcase" className="section-padding showcase-section" style={{ paddingTop: '120px' }}>
-      <div className="container">
-
-        <div className="section-header center" style={{ marginBottom: '40px', maxWidth: '1200px', width: '100%' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px' }}>
-            Tu Negocio no es Genérico. <br />
-            <span style={{
-              background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              Tu Software Tampoco
-            </span>
-          </h2>
-          <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '100%', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
-            Desarrollamos las herramientas exactas que necesitas: desde <span style={{ color: '#26d0ce', fontWeight: 700, textShadow: '0 0 20px rgba(38, 208, 206, 0.3)' }}>automatizaciones con IA</span> hasta plataformas completas que multiplican tu eficiencia.
-          </p>
-          <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn-primary large">
-              Auditar mi Negocio Gratis <ArrowRight size={20} />
-            </button>
-            <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="btn-secondary large" style={{
-              background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.2)',
-              color: 'var(--text-primary)',
-              padding: '12px 28px',
-              borderRadius: '9999px',
-              fontWeight: 600,
-              fontSize: '1rem',
-              transition: 'all 0.3s ease'
-            }}>
-              Ver Soluciones
+            <h2 className="text-charcoal text-lg font-bold leading-tight tracking-[-0.015em]">Solucionator</h2>
+          </div>
+          <div className="flex flex-1 justify-end gap-8">
+            <div className="hidden md:flex items-center gap-9">
+              <a className="text-charcoal text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Services</a>
+              <a className="text-charcoal text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Portfolio</a>
+              <a className="text-charcoal text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">About</a>
+              <a className="text-charcoal text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contact</a>
+            </div>
+            <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-charcoal text-white hover:bg-primary hover:text-charcoal transition-all duration-300 text-sm font-bold leading-normal tracking-[0.015em]">
+              <span className="truncate">Start Project</span>
             </button>
           </div>
-        </div>
+        </header>
 
-        <div className="bento-grid-layout">
-          <motion.div
-            className="bento-item wide creators-card"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <img src="/images/editor.png" alt="Video Editor Workspace" className="bento-bg-image" />
-            <div className="bento-overlay"></div>
-
-            <div className="card-top-content">
-              <div className="card-tag purple mb-auto">CREADORES</div>
-              <div className="mt-auto pb-8">
-                <h3 className="text-3xl font-bold mb-2">Viral Trends Dashboard</h3>
-                <p className="opacity-90 max-w-md">Tu centro de comando para detectar oportunidades de contenido antes que la competencia.</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="bento-item dark business-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <img src="/images/meeting.png" alt="Executive Meeting" className="bento-bg-image" />
-            <div className="bento-overlay"></div>
-
-            <div className="card-padding relative z-10">
-              <div className="card-tag blue w-auto self-start">EMPRESAS</div>
-              <div className="mt-auto">
-                <h3 className="card-title-lg text-white">Board Intelligence</h3>
-                <p>Proyecciones en tiempo real para tomar decisiones basadas en datos.</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="bento-item logistics-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <img src="/images/warehouse.png" alt="Warehouse Manager" className="bento-bg-image" />
-            <div className="bento-overlay"></div>
-
-            <div className="card-padding relative z-10">
-              <div className="card-tag green w-auto self-start">LOGÍSTICA</div>
-              <div className="mt-auto">
-                <h3 className="card-title-lg">Live Inventory</h3>
-                <p>Control total de stock desde una sola pantalla centralizada.</p>
-              </div>
-            </div>
-          </motion.div>
-
-
-        </div>
-
-
-
-      </div>
-    </section>
-  )
-}
-
-const Testimonials = () => {
-  return (
-    <section id="testimonials" className="section-padding testimonials-section" style={{ paddingTop: '60px' }}>
-      <div className="container">
-        <div className="section-header center" style={{ marginBottom: '60px' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1 }}>
-            Historias de <span style={{
-              background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              display: 'inline-block',
-              marginLeft: '10px'
-            }}>
-              Éxito
-            </span>
-          </h2>
-        </div>
-        <div className="testimonials-grid">
-          <div className="testimonial-card">
-            <div className="user-profile">
-              <div className="avatar">JM</div>
-              <div className="user-info">
-                <div className="name">Javier Méndez</div>
-                <div className="role">Director Técnico @ FinTech</div>
-              </div>
-            </div>
-            <p className="quote">"Redujimos el tiempo de onboarding de 2 semanas a 2 días. La herramienta se pagó sola en el primer mes de uso."</p>
-          </div>
-          <div className="testimonial-card">
-            <div className="user-profile">
-              <div className="avatar">SR</div>
-              <div className="user-info">
-                <div className="name">Sofía R.</div>
-                <div className="role">Creator Economy (1.2M+ Subs)</div>
-              </div>
-            </div>
-            <p className="quote">"Mi equipo perdía 15 horas/semana investigando. Ahora tenemos guiones virales listos cada mañana automáticamente."</p>
-          </div>
-          <div className="testimonial-card">
-            <div className="user-profile">
-              <div className="avatar">LG</div>
-              <div className="user-info">
-                <div className="name">Logística Global</div>
-                <div className="role">Gerencia de Operaciones</div>
-              </div>
-            </div>
-            <p className="quote">"La solución BYOK fue clave. Usamos nuestra propia API Key y mantenemos control total de los datos sensibles."</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const faqs = [
-    { q: "¿Necesito saber programar para usar las apps?", a: "No. Nosotros construimos la app por ti. Te entregamos un producto listo para usar, diseñado a medida de tu flujo de trabajo." },
-    { q: "¿Qué significa BYOK (Bring Your Own Key)?", a: "Significa que tú usas tu propia clave de API de OpenAI o Anthropic. Así pagas el costo real de uso a ellos, sin sobreprecios nuestros." },
-    { q: "¿Puedo pedir cambios después de la entrega?", a: "Sí, todos nuestros planes incluyen un periodo de soporte y ajustes para asegurar que la herramienta se adapta perfectamente a ti." },
-    { q: "¿Cuánto tarda el desarrollo?", a: "Depende de la complejidad, pero la mayoría de nuestras soluciones tipo 'Micro-SaaS' están listas en menos de 7 días." }
-  ];
-
-  return (
-    <section className="section-padding faq-section" style={{ paddingTop: '60px' }}>
-      <div className="container faq-container">
-        <div className="section-header center w-full" style={{ marginBottom: '60px' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1 }}>
-            Preguntas <span style={{
-              background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              display: 'inline-block',
-              marginLeft: '10px'
-            }}>
-              Frecuentes
-            </span>
-          </h2>
-        </div>
-        <div className="faq-list">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className={`faq-item ${openIndex === idx ? 'open' : ''}`}>
-              <button
-                className="faq-question"
-                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-              >
-                {faq.q}
-                <ChevronDown className={`icon-chevron ${openIndex === idx ? 'rotate' : ''}`} size={18} />
-              </button>
-              <div className={`faq-answer ${openIndex === idx ? 'open' : ''}`}>
-                <div className="faq-content-inner">
-                  {faq.a}
+        <main className="flex-1">
+          {/* Hero Section */}
+          <section className="relative">
+            <div className="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-10 lg:py-20">
+              <div className="layout-content-container flex flex-col max-w-[1200px] flex-1">
+                <div className="@container">
+                  <div className="flex flex-col gap-12 py-10 lg:flex-row items-center">
+                    {/* Text Content */}
+                    <div className="flex flex-col gap-8 flex-1">
+                      <div className="flex flex-col gap-4 text-left">
+                        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 shadow-sm">
+                          <span className="size-2 rounded-full bg-primary animate-pulse"></span>
+                          <span className="text-xs font-semibold text-charcoal">System Version 2.0 Live</span>
+                        </div>
+                        <h1 className="text-charcoal text-5xl lg:text-7xl font-black leading-[0.95] tracking-[-0.033em]">
+                          Engineering <br />
+                          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">Digital Reality.</span>
+                        </h1>
+                        <h2 className="text-gray-600 text-lg lg:text-xl font-medium leading-relaxed max-w-[600px]">
+                          We architect custom software solutions that scale. From concept to code, we build the infrastructure for your growth.
+                        </h2>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-primary text-charcoal text-base font-bold leading-normal tracking-[0.015em] hover:shadow-[0_0_20px_rgba(59,184,247,0.4)] transition-shadow">
+                          <span className="truncate">Initialize Project</span>
+                        </button>
+                        <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-xl h-12 px-6 bg-white border border-gray-200 text-charcoal text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-50 transition-colors">
+                          <span className="truncate">View Blueprint</span>
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-4 pt-4">
+                        <div className="flex -space-x-3">
+                          <div className="size-10 rounded-full border-2 border-white bg-gray-200 bg-cover bg-center" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCnaWbPgbzK3xd-rfBBTXeJTHl09ZepOy9QjYufNjqgRR9gniY36Of5uGproDxvjJyGwaGyEVWKl8dfALxfILoPI6Gp56HmA1EkfFAmNDid78Qt30GoiD2zueaT1UiWmyU0pAJYPeM4C6NXxXlysuzVGtRalo51BH0-m20iCvoogGZjNZR8DD5ct5NzcC89uwfkK6DLRHvYOPIKiPer4xHLnQ4UzToCn4VozvS0weNuAUD9Q-wh-xRn7HeShIO1eWgYX5fGDijDXsCr')" }}></div>
+                          <div className="size-10 rounded-full border-2 border-white bg-gray-200 bg-cover bg-center" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxn4qfe6y85Z5rWA3gSqsPQ3O_-f-zMb4NGqSnFTaNdyrblUCKfRJY0anc_jjN4G0kVeqd2n0nwGdh61Ofo_Gomas7jceqaH4ZyfHNXuA-gdwiY743fuNn8L2N1dIQIL4tTCfRnGcycwM6ze3nO1tvLsI7am_0P_4Y5DeaovlSqxA3oFuacklMldH1VqrfIJwZEUG50hbKUtuiJN18ouJ_q6kk34XGmEDB5nxDlvnEVwrT2tBQKaaBW01WjKxSKf-RhOl2Cb5Yp9fk')" }}></div>
+                          <div className="size-10 rounded-full border-2 border-white bg-gray-200 bg-cover bg-center" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXqWxIy150oWkH4CFwAoDBo8QDpo3I0YcowvfFfeBxqz7dGbVkMtXNg4GWO26tuU4aWwvs0vjeKpGK5Fvz3Ts-ApCXRFfjJs5zOdssHCmTPPM1D7mjXU6VKLyT8GuBirGFORJGyV5kqbyHKtewhBeRqiipGhxpAG8rHO731wxYA6dC08cmLFxxadQ4HqXlzEI1cD82yBUUGitIcW4hRasOBfRHlFnqfNGEUyr72PJmXrJ6BxUiPjeEckLsFzh0xAmASCMXWzG65yyz')" }}></div>
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex gap-1 text-primary">
+                            <span className="material-symbols-outlined text-sm">star</span>
+                            <span className="material-symbols-outlined text-sm">star</span>
+                            <span className="material-symbols-outlined text-sm">star</span>
+                            <span className="material-symbols-outlined text-sm">star</span>
+                            <span className="material-symbols-outlined text-sm">star</span>
+                          </div>
+                          <span className="text-xs font-bold text-charcoal">Trusted by 500+ Engineers</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Visual Content */}
+                    <div className="w-full flex-1 relative perspective-1000 group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                      <div className="relative w-full aspect-square md:aspect-[4/3] bg-charcoal rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex items-center justify-center">
+                        {/* Abstract 3D Representation */}
+                        <div className="w-full h-full bg-cover bg-center opacity-90 mix-blend-screen" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuADl2FMUUpRlNTtaEdLKPw1CzrUlaULbUufQLdLX65gV9aHArufO2SOpIuhj1pPcJ6MslOQxJf33pgd4b5s4gO1fjfJEKGw2Q5zsV5V77WXkeP8-ehsVvbG3Yw2d0e9T0NxqUxjWD5I8xb4SXhLXpizDM6oWYeeCi7yBpz02SIq2VZs-iomTtu1SKlHGKu3nGdGsf1I4MtBZiLQfyXQnuVgiGa8fWVqa2wA7-py5LeWCm46upUZKTtpUN3v7CVDm6SdjNBDZ7EeHiMX')" }}>
+                        </div>
+                        {/* Overlay UI Element Mockup */}
+                        <div className="absolute bottom-8 left-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-lg">
+                          <div className="flex justify-between items-center mb-3">
+                            <div className="flex gap-2">
+                              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div className="text-[10px] font-mono text-primary uppercase">Status: Optimal</div>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="h-2 w-3/4 bg-white/20 rounded"></div>
+                            <div className="h-2 w-1/2 bg-white/20 rounded"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+          </section>
 
-const CTA = () => {
-  const [formState, setFormState] = useState<'idle' | 'sending' | 'success'>('idle');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormState('sending');
-
-    // Simulate network request & fallback to mailto
-    setTimeout(() => {
-      window.location.href = `mailto:solucionatorai@gmail.com?subject=Consulta desde Web&body=Email: ${email}%0D%0A%0D%0AMensaje: ${message}`;
-      setFormState('success');
-      setEmail('');
-      setMessage('');
-      setTimeout(() => setFormState('idle'), 3000);
-    }, 800);
-  };
-
-  return (
-    <section id="contact" className="section-padding cta-section">
-      <div className="container">
-        <div className="cta-card glass-panel-dark">
-          <div className="cta-content-grid">
-            <div className="cta-text-col">
-              <h2 className="cta-title" style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', lineHeight: 1.1, marginBottom: '24px', fontWeight: 800 }}>
-                Solicita tu <br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}>
-                  Roadmap de IA
-                </span>
-              </h2>
-              <p className="cta-desc" style={{ fontSize: '1.25rem', marginBottom: '32px', maxWidth: '90%' }}>
-                Analizamos tus cuellos de botella y te diseñamos un plan de automatización a medida. <span className="text-white font-bold">Sin coste. Sin compromiso.</span>
-              </p>
-              <div className="cta-benefits">
-                <div className="benefit-item"><div className="check-icon">✓</div> Auditoría de procesos manuales</div>
-                <div className="benefit-item"><div className="check-icon">✓</div> Estrategia de implementación (7 días)</div>
-                <div className="benefit-item"><div className="check-icon">✓</div> Calculadora de ROI personalizada</div>
-              </div>
-              <div className="mt-6 flex items-center gap-2 text-sm text-yellow-400 font-medium bg-yellow-400/10 p-2 rounded-lg w-fit border border-yellow-400/20">
-                <Sparkles size={16} /> Solo 3 cupos de consultoría disponibles esta semana
+          {/* Social Proof */}
+          <section className="border-y border-gray-200 bg-white/50 backdrop-blur-sm">
+            <div className="px-4 md:px-10 lg:px-40 py-8">
+              <div className="max-w-[1200px] mx-auto">
+                <h4 className="text-gray-500 text-sm font-bold uppercase tracking-widest text-center mb-8">Trusted by forward-thinking companies</h4>
+                <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale transition-all hover:grayscale-0">
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">hexagon</span> ACME Corp</div>
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">change_history</span> Vertex</div>
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">all_inclusive</span> Infinite</div>
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span class="material-symbols-outlined">polymer</span> Nexus</div> {/* Fixed typo manually class->className */}
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">view_in_ar</span> Cube</div>
+                </div>
               </div>
             </div>
+          </section>
 
-            <form className="cta-form" onSubmit={handleSubmit} style={{ position: 'relative' }}>
-              <div className="input-group">
-                <label>¿Dónde te enviamos el plan?</label>
-                <input
-                  type="email"
-                  placeholder="tu@empresa.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+          {/* Features Section */}
+          <section className="py-20 px-4 md:px-10 lg:px-40">
+            <div className="max-w-[1200px] mx-auto flex flex-col gap-10">
+              <div className="flex flex-col gap-4 text-center md:text-left">
+                <h2 className="text-charcoal text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">
+                  Core Architectures
+                </h2>
+                <p className="text-gray-600 text-base md:text-lg font-normal leading-normal max-w-[720px]">
+                  Our three pillars of digital transformation, engineered for precision and scale. We don't just build websites; we construct ecosystems.
+                </p>
               </div>
-              <div className="input-group">
-                <label>Descríbenos tu mayor dolor de cabeza actual</label>
-                <textarea
-                  rows={3}
-                  placeholder="Ej: 'Mi equipo pierde 4 horas al día extrayendo datos de PDFs...'"
-                  required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                ></textarea>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Card 1 */}
+                <div className="group flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 hover:border-charcoal hover:shadow-xl transition-all duration-300">
+                  <div className="w-12 h-12 rounded-lg bg-charcoal text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-charcoal transition-colors">
+                    <span className="material-symbols-outlined text-[28px]">terminal</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-charcoal text-xl font-bold">Custom Development</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Robust, scalable code infrastructures built for high-performance applications. We write clean, efficient code that stands the test of time.
+                    </p>
+                  </div>
+                </div>
+                {/* Card 2: Highlighted Dark Card for Contrast */}
+                <div className="group flex flex-col gap-4 rounded-2xl border border-charcoal bg-charcoal p-6 shadow-2xl transform md:-translate-y-4">
+                  <div className="w-12 h-12 rounded-lg bg-white/10 text-primary flex items-center justify-center border border-white/10">
+                    <span className="material-symbols-outlined text-[28px]">design_services</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-white text-xl font-bold">Strategic Design</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      User-centric interfaces designed with architectural precision. We merge aesthetics with functionality to create seamless experiences.
+                    </p>
+                  </div>
+                </div>
+                {/* Card 3 */}
+                <div className="group flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 hover:border-charcoal hover:shadow-xl transition-all duration-300">
+                  <div className="w-12 h-12 rounded-lg bg-charcoal text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-charcoal transition-colors">
+                    <span className="material-symbols-outlined text-[28px]">explore</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-charcoal text-xl font-bold">Digital Strategy</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      Data-driven roadmaps that align technology with your business goals. We plot the course before laying the first brick.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <button
-                type="submit"
-                className={`btn-primary full-width ${formState === 'success' ? 'success' : ''}`}
-                disabled={formState === 'sending' || formState === 'success'}
-              >
-                {formState === 'idle' && (
-                  <>Recibir mi Plan de Automatización <ArrowRight size={18} /></>
-                )}
-                {formState === 'sending' && 'Analizando solicitud...'}
-                {formState === 'success' && '¡Solicitud Recibida!'}
-              </button>
-              <p className="form-note">Te responderemos en menos de 24h con tu diagnóstico.</p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <div className="brand-logo" style={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/logo-full.png" alt="Solucionator AI" style={{ height: '35px', width: 'auto' }} />
             </div>
-            <p>
-              Deja de adaptar tu negocio al software. Construye la tecnología exacta para dominar tu mercado.
-            </p>
-            <p style={{ marginTop: '16px', fontSize: '0.85rem', color: '#94a3b8', fontStyle: 'italic' }}>
-              ¿Sigues bajando? Eso significa que tu intuición te dice algo. <a href="#" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ color: '#26d0ce', textDecoration: 'underline' }}>Hagámoslo realidad.</a>
-            </p>
+          </section>
+
+          {/* Portfolio Grid */}
+          <section className="py-20 px-4 md:px-10 lg:px-40 bg-white border-t border-gray-200">
+            <div className="max-w-[1200px] mx-auto flex flex-col gap-10">
+              <div className="flex items-center justify-between">
+                <h2 className="text-charcoal text-3xl font-bold tracking-tight">Recent Deployments</h2>
+                <a className="hidden md:flex items-center gap-1 text-sm font-bold text-primary hover:underline" href="#">
+                  View all projects <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Project 1 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIOoJJZkHvxy6ugVVl5Allf45EugUZ7PpA17_A9ZrbR96Rv7hPaCGO8EsL6zuUar3LMztyRINK2n4UZ5C8jHLdU2HCrXTSr68vw3N3vE14A3NcLy6ca4IbtpxVipii2ZiBCgvxer5OqKz8H29Sq5mSUMemG6htlKCnC4Da5LG9ZKj3y6QTo0oLBpaKLi2p-3t9m59eHF23yDLQMBVtjmMfSi1Q4oSzxSxwP-SMtcoPjkMmluxqDPfsfBAA-tAyen9hL8Q6JEwBH9GX')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg">FinTech Dashboard</h4>
+                      <p className="text-primary text-sm">Web Application</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Project 2 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer md:col-span-2">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDsvs93vAMF3WesHIufOAiaOE7x6PsNyFRRsrTScIxGCcelFYKjPzUSuAiqDbM9vyUWGxYh9FzwCnVdeIJFn2BV_E-6gObadSrwRbNhefaxyzwbB15B_y5r0Yyzlj2nv8eklYLVF-E-ymzML1ysRgIth5OX7gZTrPaboO9jWqXx9NZRntNglCt3qvfUzVQGdCx215b0Mg1TV9H9evX_npTEcf-kwWWd2lDGskVPTAMg3yBVKPuCN2WfdzfF8-Sk_HER5AQ4coZsB2wk')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg">Analytics Engine</h4>
+                      <p className="text-primary text-sm">Data Science</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Project 3 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnF-3Dy_G6Qlre7GkVaVuG_o4JNJdusE3uHLt8KWKWM_UFsNYEJuvacd7CpspDgFUbhjpkr71ke0nmEvbxCKUNZ4LjmazKCvNuS_IUodIBOzq_edA79zKvwZuiXAAkfxsGtwfGUnI085lR6vNddD6aj_Uy8MOcqHUcc3iB6URi1tt-qIzwLUU2rxxyjJpqUfC2vyHwhDlJ_mjOvFLafAKwLCT-nFg7FALs1CeXI2WBIaxMZ4D3aaCfyX1NupfLbHMdlvmV-hv0brs4')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg">HealthConnect</h4>
+                      <p className="text-primary text-sm">Mobile App</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Project 4 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrk9SuLMsqYUG-G1LgYzmzqNZTzB8xVvajtZZLRDxM1lDfL_uW9Uwruo1WI_yYD02O7VsoYjcQKfrrGD7Gjf4-T4xl6gLS8BOnGwbK_AEmatbl_mn4Zg0C4C-LUjP9lW4n008wTJxczE3tXzXx0GNwrhWU6wd94y4qfjttaNYQb6UwC7SqnMnKtih4KF7vh8dikM5E4aq6zbp7z4sBYeghdWNHJjuMUmaL_jRayYiSSR0hg29j7GJ8NDBXz_dDGqIXdhAdbpfBOiIJ')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 class="text-white font-bold text-lg">DevOps Platform</h4> {/* Typo fixed to className */}
+                      <p className="text-primary text-sm">Cloud Infrastructure</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Project 5 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCalgpHz6m9Qjs8jlBOEdA8wf5mDK5JqPT1IZoCIQx2ETD-LCgf09dc2tln0iPzi8oG-PjgPxlHDPV8k7ib_1zdv-EVs9lOlzpS_tRX1VLiJAhue8_NQYtck7FnCsw2ROS0r78vhAVUxVrM3MHE2-UF-zJSDPQvzUtGhDYGRiexMLEwAIrigi2LwMCr2jaBuLZlbMVeo3MsQtVDsLwLgHHqx-43BpfdQiAUqKfecUkUDzsHWlg-Qc8CsRB_wqhJBqjKyN7pu7je_DPS')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg">Crypto Wallet</h4>
+                      <p className="text-primary text-sm">Blockchain</p>
+                    </div>
+                  </div>
+                </div>
+                {/* Project 6 */}
+                <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-100 cursor-pointer md:col-span-2">
+                  <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCGyZpg64DecopcU5_VOUTUIkpcTdkY4vXZIjcuxQ2UTS6FvYg5lOvC2EwFcYqNtTSK1mqdS_pozu9cm_7iCDVYLTw18p6_OJ4JSJ41r9nhkcqiG4X7cB6otEuaMoy-Sv_1DXs4kemzcrAxVlu__YvhNYGeRTQvLMFtZiAo70gmmih6rkUBopDu9OYwbacR-_QJ8QEc-Y78N_LX3Tj4AxSKoeQqUP7v1tnYE9a_nIJtxeRBaM4X_Lt2_m9pfsTgcb8zdzvBycSgSPck')" }}></div>
+                  <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h4 className="text-white font-bold text-lg">Server Migration</h4>
+                      <p className="text-primary text-sm">Enterprise IT</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex md:hidden justify-center mt-4">
+                <a className="flex items-center gap-1 text-sm font-bold text-primary hover:underline" href="#">
+                  View all projects <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-charcoal text-white pt-16 pb-8 px-4 md:px-10 lg:px-40">
+          <div className="max-w-[1200px] mx-auto flex flex-col gap-10">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+              <div className="flex flex-col gap-4 max-w-sm">
+                <div className="flex items-center gap-2 text-white">
+                  <div className="flex size-6 items-center justify-center rounded bg-primary text-charcoal">
+                    <span className="material-symbols-outlined text-[16px]">architecture</span>
+                  </div>
+                  <h2 className="text-lg font-bold">Solucionator</h2>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Engineered for excellence. We build the digital tools that power tomorrow's businesses today.
+                </p>
+              </div>
+              <div className="flex gap-16 flex-wrap">
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-bold text-primary">Company</h4>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">About</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Careers</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Blog</a>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-bold text-primary">Resources</h4>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Documentation</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Help Center</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Privacy</a>
+                </div>
+                <div className="flex flex-col gap-4">
+                  <h4 className="font-bold text-primary">Connect</h4>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">Twitter</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">LinkedIn</a>
+                  <a className="text-gray-400 hover:text-white text-sm" href="#">GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-gray-500 text-xs">© 2023 Solucionator Inc. All rights reserved.</p>
+              <p className="text-gray-600 text-xs">System Status: <span className="text-green-500">Operational</span></p>
+            </div>
           </div>
-          <div className="footer-links-col">
-            <h4>Aprender</h4>
-            <ul>
-              <li><a href="#features">Casos de Uso</a></li>
-              <li><a href="#showcase">Galería</a></li>
-            </ul>
-          </div>
-          <div className="footer-links-col">
-            <h4>Contacto</h4>
-            <ul>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToContact(); }}><b>Agendar Consultoría</b></a></li>
-              <li><a href="mailto:solucionatorai@gmail.com">Email Directo</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <div>© {new Date().getFullYear()} Solucionator. Todos los derechos reservados.</div>
-          <div className="social-links">
-            <a href="#">Twitter</a>
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
-          </div>
-        </div>
+        </footer>
       </div>
-    </footer>
-  )
-}
-
-function App() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDark(prefersDark);
-    if (prefersDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  };
-
-  return (
-    <div className="app">
-      <Navbar isDark={isDark} toggleTheme={toggleTheme} />
-      <Showcase />
-      <Features />
-      <Testimonials />
-      <FAQ />
-      <CTA />
-      <Footer />
     </div>
   );
 }
-
-export default App;
