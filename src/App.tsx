@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 
 // Note: Ensure Tailwind is installed and configured for these classes to work.
@@ -119,7 +118,7 @@ export default function App() {
                   <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">hexagon</span> ACME Corp</div>
                   <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">change_history</span> Vertex</div>
                   <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">all_inclusive</span> Infinite</div>
-                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span class="material-symbols-outlined">polymer</span> Nexus</div> {/* Fixed typo manually class->className */}
+                  <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">polymer</span> Nexus</div>
                   <div className="text-xl font-black text-charcoal flex items-center gap-2"><span className="material-symbols-outlined">view_in_ar</span> Cube</div>
                 </div>
               </div>
@@ -223,7 +222,7 @@ export default function App() {
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrk9SuLMsqYUG-G1LgYzmzqNZTzB8xVvajtZZLRDxM1lDfL_uW9Uwruo1WI_yYD02O7VsoYjcQKfrrGD7Gjf4-T4xl6gLS8BOnGwbK_AEmatbl_mn4Zg0C4C-LUjP9lW4n008wTJxczE3tXzXx0GNwrhWU6wd94y4qfjttaNYQb6UwC7SqnMnKtih4KF7vh8dikM5E4aq6zbp7z4sBYeghdWNHJjuMUmaL_jRayYiSSR0hg29j7GJ8NDBXz_dDGqIXdhAdbpfBOiIJ')" }}></div>
                   <div className="absolute inset-0 bg-charcoal/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      <h4 class="text-white font-bold text-lg">DevOps Platform</h4> {/* Typo fixed to className */}
+                      <h4 className="text-white font-bold text-lg">DevOps Platform</h4>
                       <p className="text-primary text-sm">Cloud Infrastructure</p>
                     </div>
                   </div>
