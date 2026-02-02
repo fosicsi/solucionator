@@ -101,17 +101,16 @@ const Features = () => {
       <div className="container">
         <div className="section-header center" style={{ marginBottom: '60px' }}>
           <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px' }}>
-            Soluciones que&nbsp;
+            Soluciones que <br />
             <span style={{
               background: 'linear-gradient(135deg, #26d0ce 0%, #9f5afd 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              display: 'inline-block', // Changed from block to inline-block/inline to flow better or block with more space
             }}>
               Pagan su Propio Desarrollo
             </span>
           </h2>
-          <p style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', maxWidth: '800px', margin: '24px auto 0', lineHeight: 1.6, color: 'var(--text-secondary)' }}>
+          <p style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', maxWidth: '100%', margin: '0 auto', lineHeight: 1.4, letterSpacing: '-0.01em' }}>
             No vendemos software genérico. Creamos <span style={{ color: '#26d0ce', fontWeight: 700 }}>activos digitales</span> que trabajan por ti.
           </p>
         </div>
